@@ -81,16 +81,6 @@ func TestFib(t *testing.T) {
 	res := fib(n)
 	log.Print(res)
 }
-func max(nums []int) int {
-	var in = nums[0]
-	for i := 1; i < (len(nums) - 1); i++ {
-		if nums[i] > nums[i-1] {
-			in = nums[i]
-		}
-	}
-	return in
-}
-
 func TestLengthOfLIS(t *testing.T) {
 	var n = []int{1, 3, 6, 7, 9, 4, 10, 5, 6}
 	res := lengthOfLIS(n)
@@ -268,4 +258,36 @@ func min(r, p int) int {
 		return p
 	}
 	return r
+}
+func maxProfit(k int, prices []int) int {
+	var zuan []int
+	res := 0
+	now := 0
+	end := 0
+	for i := 0; i < len(prices)-1; i++ {
+		if prices[i] < prices[i+1] {
+			now = prices[i]
+		}
+		if prices[i] > prices[i+1] {
+			end = prices[i]
+			zuan = append(zuan, end-now)
+		}
+	}
+	if len(zuan) == 0 {
+		return 0
+
+	}
+	for j := 0; j < len(zuan); j++ {
+		if j > k-1 {
+			break
+		}
+		res = res + zuan[j]
+	}
+	return res
+}
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
 }
